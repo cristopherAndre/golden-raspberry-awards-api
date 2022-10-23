@@ -25,4 +25,6 @@ public class Producer {
     @Column(nullable = false)
     private String name;
 
+    //TODO criar relacionamentos
+
 }

@@ -25,4 +25,6 @@ public class Studio {
     @Column(nullable = false)
     private String name;
 
+    //TODO criar relacionamentos
+
 }

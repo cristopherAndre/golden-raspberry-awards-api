@@ -24,6 +24,7 @@ public class Movie {
 
     @Column(nullable = false)
     private String title;
-    
+
+    //TODO criar relacionamentos
 
 }

@@ -25,4 +25,6 @@ public class GRAWinner {
     @Column(nullable = false)
     private Integer awardYear;
 
+    //TODO criar relacionamentos
+
 }

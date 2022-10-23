@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProducerDTO {
+public class GRAWinnerDTO {
 
     private Long id;
-    private String name;
+    private Integer awardYear;
     
 }
