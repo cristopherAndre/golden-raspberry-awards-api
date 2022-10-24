@@ -1,7 +1,10 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +42,24 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Collection<Studio> fetchStudios() {
         return repository.findAll();
+    }
+
+    @Override
+    public Set<Studio> saveStudios(String studios) {
+        Set<Studio> ret = new HashSet<>();
+        String[] studioNames = studios.split(",|\\ and ");
+
+        if(Objects.nonNull(studioNames) && studioNames.length > 0){
+            for (String studioName : studioNames) {
+                Studio studioModel = repository.findByName(studioName);                
+                if(Objects.isNull(studioModel)){
+                    Studio studio = Studio.builder().name(studioName).build();
+                    studioModel = repository.save(studio);                                     
+                }
+                ret.add(studioModel);
+            }
+        }
+        return ret;
     }
 
 }

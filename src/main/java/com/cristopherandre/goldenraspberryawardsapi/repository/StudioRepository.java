@@ -8,4 +8,6 @@ import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 @Repository
 public interface StudioRepository extends JpaRepository<Studio, Long> {
 
+    public Studio findByName(String name);
+
 }

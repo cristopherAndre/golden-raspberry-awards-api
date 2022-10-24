@@ -8,4 +8,6 @@ import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 @Repository
 public interface ProducerRepository extends JpaRepository<Producer, Long> {
 
+    public Producer findByName(String name);
+
 }

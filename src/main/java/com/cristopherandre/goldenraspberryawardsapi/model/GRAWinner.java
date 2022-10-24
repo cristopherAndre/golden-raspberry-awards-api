@@ -2,9 +2,11 @@ package com.cristopherandre.goldenraspberryawardsapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +27,7 @@ public class GRAWinner {
     @Column(nullable = false)
     private Integer awardYear;
 
-    //TODO criar relacionamentos
+    @OneToOne(fetch=FetchType.EAGER)
+    private Movie movie;
 
 }

@@ -1,10 +1,14 @@
 package com.cristopherandre.goldenraspberryawardsapi.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +29,7 @@ public class Producer {
     @Column(nullable = false)
     private String name;
 
-    //TODO criar relacionamentos
+    @ManyToMany(fetch=FetchType.EAGER)
+    private Set<Movie> movies;
 
 }

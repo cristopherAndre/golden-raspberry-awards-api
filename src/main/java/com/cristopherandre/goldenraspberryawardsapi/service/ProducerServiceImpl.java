@@ -1,7 +1,10 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +42,24 @@ public class ProducerServiceImpl implements ProducerService{
     @Override
     public Collection<Producer> fetchProducers() {
         return repository.findAll();
+    }
+
+    @Override
+    public Set<Producer> saveProducers(String producers) {
+        Set<Producer> ret = new HashSet<>();
+        String[] producerNames = producers.split(",|\\ and ");
+
+        if(Objects.nonNull(producerNames) && producerNames.length > 0){
+            for (String producerName : producerNames) {
+                Producer producerModel = repository.findByName(producerName);                
+                if(Objects.isNull(producerModel)){
+                    Producer producer = Producer.builder().name(producerName).build();
+                    producerModel = repository.save(producer);                    
+                }
+                ret.add(producerModel);
+            }
+        }
+        return ret;
     }
     
 }
