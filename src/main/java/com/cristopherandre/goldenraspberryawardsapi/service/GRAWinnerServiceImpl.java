@@ -90,7 +90,7 @@ public class GRAWinnerServiceImpl implements GRAWinnerService {
                 String studios = record.get("studios");
                 String title = record.get("title");
                 Integer year = Integer.parseInt(record.get("year"));
-                Boolean isWinner = Boolean.parseBoolean(record.get("winner"));
+                Boolean isWinner = record.get("winner").trim().equalsIgnoreCase("YES") ? true : false;
 
                 Set<Producer> producersList = producerService.saveProducers(producers);
                 Set<Studio> studiosList = studioService.saveStudios(studios);

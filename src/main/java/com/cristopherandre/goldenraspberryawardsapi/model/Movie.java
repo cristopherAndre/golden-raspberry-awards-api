@@ -36,7 +36,7 @@ public class Movie {
     @ManyToMany(fetch=FetchType.EAGER)
     private Set<Producer> producers;
 
-    @OneToOne(fetch=FetchType.EAGER)
-    private GRAWinner graWinners;
+    // @OneToOne(fetch=FetchType.EAGER)
+    // private GRAWinner graWinners;
 
 }

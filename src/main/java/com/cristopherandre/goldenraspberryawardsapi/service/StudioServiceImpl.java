@@ -1,5 +1,6 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -47,14 +48,14 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Set<Studio> saveStudios(String studios) {
         Set<Studio> ret = new HashSet<>();
-        String[] studioNames = studios.split(",|\\ and ");
+        String[] studioNames = Arrays.stream(studios.split(",|\\ and ")).map(String::trim).toArray(String[]::new);
 
-        if(Objects.nonNull(studioNames) && studioNames.length > 0){
+        if (Objects.nonNull(studioNames) && studioNames.length > 0) {
             for (String studioName : studioNames) {
-                Studio studioModel = repository.findByName(studioName);                
-                if(Objects.isNull(studioModel)){
+                Studio studioModel = repository.findByName(studioName);
+                if (Objects.isNull(studioModel)) {
                     Studio studio = Studio.builder().name(studioName).build();
-                    studioModel = repository.save(studio);                                     
+                    studioModel = repository.save(studio);
                 }
                 ret.add(studioModel);
             }

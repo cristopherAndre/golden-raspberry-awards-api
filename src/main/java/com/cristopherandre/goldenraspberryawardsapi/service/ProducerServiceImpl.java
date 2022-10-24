@@ -1,5 +1,6 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 import com.cristopherandre.goldenraspberryawardsapi.repository.ProducerRepository;
 
 @Service
-public class ProducerServiceImpl implements ProducerService{
+public class ProducerServiceImpl implements ProducerService {
 
     @Autowired
     private ProducerRepository repository;
@@ -47,19 +48,19 @@ public class ProducerServiceImpl implements ProducerService{
     @Override
     public Set<Producer> saveProducers(String producers) {
         Set<Producer> ret = new HashSet<>();
-        String[] producerNames = producers.split(",|\\ and ");
+        String[] producerNames = Arrays.stream(producers.split(",|\\ and ")).map(String::trim).toArray(String[]::new);
 
-        if(Objects.nonNull(producerNames) && producerNames.length > 0){
+        if (Objects.nonNull(producerNames) && producerNames.length > 0) {
             for (String producerName : producerNames) {
-                Producer producerModel = repository.findByName(producerName);                
-                if(Objects.isNull(producerModel)){
+                Producer producerModel = repository.findByName(producerName);
+                if (Objects.isNull(producerModel)) {
                     Producer producer = Producer.builder().name(producerName).build();
-                    producerModel = repository.save(producer);                    
+                    producerModel = repository.save(producer);
                 }
                 ret.add(producerModel);
             }
         }
         return ret;
     }
-    
+
 }
