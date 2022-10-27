@@ -26,7 +26,7 @@ import com.cristopherandre.goldenraspberryawardsapi.service.GRANomineeService;
  * @author Cristopher Andre
  */
 @RestController
-@RequestMapping("/api/v1/granominees")
+@RequestMapping("/granominees")
 public class GRANomineeController {
 
     @Autowired

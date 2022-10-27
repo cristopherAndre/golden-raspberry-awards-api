@@ -119,4 +119,15 @@ public class GRANomineeServiceImpl implements GRANomineeService {
         return maxInterval;
     }
 
+    @Override
+    public GRANominee findByMovieId(Long id) {
+        Optional<GRANominee> graNominee = Optional.empty();
+        if (Objects.nonNull(id)) {
+            graNominee = repository.findByMovieId(id);
+            if (!graNominee.isPresent())
+                throw new RecordNotFoundException(id);
+        }
+        return graNominee.isPresent() ? graNominee.get() : null;
+    }
+
 }

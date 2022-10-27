@@ -25,7 +25,7 @@ import com.cristopherandre.goldenraspberryawardsapi.service.StudioService;
  * @author Cristopher Andre
  */
 @RestController
-@RequestMapping("/api/v1/studios")
+@RequestMapping("/studios")
 public class StudioController {
 
     @Autowired

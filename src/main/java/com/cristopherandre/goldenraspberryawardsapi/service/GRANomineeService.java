@@ -26,4 +26,6 @@ public interface GRANomineeService {
 
     public abstract GRAWinnersMinMaxDTO findGRAWinnersMinMaxInterval();
 
+    public abstract GRANominee findByMovieId(Long id);
+
 }

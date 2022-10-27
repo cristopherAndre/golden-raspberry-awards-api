@@ -1,6 +1,7 @@
 package com.cristopherandre.goldenraspberryawardsapi.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -41,5 +42,7 @@ public interface GRANomineeRepository extends JpaRepository<GRANominee, Long> {
             + "HAVING COUNT (m.title) > 1 "
             + "ORDER BY (MAX(n.awardYear) - MIN(n.awardYear)) ")
     List<GRAWinnerIntervalDTO> findGRAWinnersInterval();
+
+    public Optional<GRANominee> findByMovieId(Long id);
 
 }

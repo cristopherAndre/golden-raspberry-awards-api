@@ -25,7 +25,7 @@ import com.cristopherandre.goldenraspberryawardsapi.service.MovieService;
  * @author Cristopher Andre
  */
 @RestController
-@RequestMapping("/api/v1/movies")
+@RequestMapping("/movies")
 public class MovieController {
 
     @Autowired

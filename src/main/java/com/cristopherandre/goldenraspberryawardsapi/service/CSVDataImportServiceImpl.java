@@ -51,37 +51,37 @@ public class CSVDataImportServiceImpl implements CSVDataImportService {
 
         Reader csvFile = null;
         Duration timeElapsed = null;
-        String csvDataFileLocation = env.getProperty("initial.data.csv.location");
-        String csvDataFileName = env.getProperty("initial.data.csv.file");
 
         try {
             Instant start = Instant.now();
             logger.info("---------STARTING CSV IMPORT DATA---------");
 
-            csvFile = new FileReader(csvDataFileLocation + csvDataFileName);
-            Iterable<CSVRecord> records = CSVFormat.DEFAULT.builder()
-                    .setDelimiter(";")
-                    .setHeader(HEADERS)
-                    .setSkipHeaderRecord(true)
-                    .setIgnoreEmptyLines(true)
-                    .build()
-                    .parse(csvFile);
+            // Le o arquivo de importação CSV
+            Iterable<CSVRecord> records = readCSVFile();
 
-            for (CSVRecord record : records) {
-                String producers = record.get("producers");
-                String studios = record.get("studios");
-                String title = record.get("title");
-                Integer year = Integer.parseInt(record.get("year"));
-                boolean isWinner = record.get("winner").trim().equalsIgnoreCase("YES");
+            // Percorre os items do arquivo de importação CSV
+            if(Objects.nonNull(records)){
+                for (CSVRecord record : records) {
 
-                Set<Producer> producersList = producerService.saveProducers(producers);
-                Set<Studio> studiosList = studioService.saveStudios(studios);
+                    // Lê os valores de cada coluna
+                    String producers = record.get("producers");
+                    String studios = record.get("studios");
+                    String title = record.get("title");
+                    Integer year = Integer.parseInt(record.get("year"));
+                    boolean isWinner = record.get("winner").trim().equalsIgnoreCase("YES");
 
-                Movie movie = Movie.builder().title(title).producers(producersList).studios(studiosList).build();
-                movieService.saveMovie(movie);
+                    // Persiste os producers/studios caso nao existirem na base e retorna a lista
+                    Set<Producer> producersList = producerService.saveProducers(producers);
+                    Set<Studio> studiosList = studioService.saveStudios(studios);
 
-                GRANominee graWinner = GRANominee.builder().awardYear(year).movie(movie).isWinner(isWinner).build();
-                graNomineeRepository.save(graWinner);
+                    // Constroi o objeto Movie e o persiste no banco
+                    Movie movie = Movie.builder().title(title).producers(producersList).studios(studiosList).build();
+                    movieService.saveMovie(movie);
+
+                    // Constroi o objeto GRANominee e o persiste no banco
+                    GRANominee graWinner = GRANominee.builder().awardYear(year).movie(movie).isWinner(isWinner).build();
+                    graNomineeRepository.save(graWinner);
+                }
             }
             Instant end = Instant.now();
             timeElapsed = Duration.between(start, end);
@@ -98,6 +98,27 @@ public class CSVDataImportServiceImpl implements CSVDataImportService {
             }
         }
 
+    }
+
+    @Override
+    public Iterable<CSVRecord> readCSVFile() {
+        String csvDataFileLocation = env.getProperty("initial.data.csv.location");
+        String csvDataFileName = env.getProperty("initial.data.csv.file");
+        Reader csvFile = null;
+        Iterable<CSVRecord> records = null;
+        try {
+            csvFile = new FileReader(csvDataFileLocation + csvDataFileName);
+            records = CSVFormat.DEFAULT.builder()
+                    .setDelimiter(";")
+                    .setHeader(HEADERS)
+                    .setSkipHeaderRecord(true)
+                    .setIgnoreEmptyLines(true)
+                    .build()
+                    .parse(csvFile);
+        } catch (Exception e) {
+            logger.error("---------ERROR WHILE READ CSV DATA---------", e);
+        }
+        return records;
     }
 
 }

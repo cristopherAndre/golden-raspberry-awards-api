@@ -24,7 +24,7 @@ mvn spring-boot:run
 - Importação de dados através de arquivo CSV para a H2 Database.
 - API Rest para as entidades Studios, Producers, Movies e GRANominees.
 - Testes de integração
-- http://localhost:8080/api/swagger-ui/index.html
+- http://localhost:8080/api/v1/swagger-ui/index.html
 - <img alt="Golden Raspberry Awards API" title="Bethehero" src=".github/GRA_API.png"/>
 
 - Obter o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido.
@@ -35,7 +35,7 @@ mvn spring-boot:run
 
 ## H2 Database:
 - URL: jdbc:h2:mem:testdb   
-- Username=sa
-- Password=sa
-- Endpoint: http://localhost:8080/api/h2
+- Username: sa
+- Password: sa
+- Endpoint: http://localhost:8080/api/v1/h2
 

@@ -25,7 +25,7 @@ import com.cristopherandre.goldenraspberryawardsapi.service.ProducerService;
  * @author Cristopher Andre
  */
 @RestController
-@RequestMapping("/api/v1/producers")
+@RequestMapping("/producers")
 public class ProducerController {
 
     @Autowired
