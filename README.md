@@ -1,1 +1,40 @@
-# golden-raspberry-awards-api
+# Golden Raspberry Awards API
+
+- API RESTful que possibilita a leitura da lista de indicados e vencedores
+da categoria Pior Filme do Golden Raspberry Awards.
+
+## Stack:
+- Java 17
+- Spring Boot 2.7.5
+- Spring Boot DevTools
+- Spring Web
+- Spring Data JPA
+- H2 Database
+- Lombok
+- Springdoc OpenAPI UI
+- Mapstruct
+- Org Apache Commons CSV
+
+## Executar projeto:
+```console
+mvn spring-boot:run
+``` 
+## Funcionallidades:
+- Importação de dados através de arquivo CSV para a H2 Database.
+- API Rest para as entidades Studios, Producers, Movies e GRANminees.
+- Testes de integração
+- http://localhost:8080/api/swagger-ui/index.html
+- <img alt="Golden Raspberry Awards API" title="Bethehero" src=".github/GRA_API.png"/>
+
+- Obter o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido.
+<img alt="GRA Min Max" title="Bethehero" src=".github/GRA_WINNERS_MIN_MAX.png"/>
+
+## Diagrama ER:
+- <img alt="Diagrama ER" title="Bethehero" src=".github/DIAGRAMA.png"/>
+
+## H2 Database:
+- URL: jdbc:h2:mem:testdb   
+- Username=sa
+- Password=sa
+- Endpoint: http://localhost:8080/api/h2
+
