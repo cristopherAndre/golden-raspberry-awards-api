@@ -14,6 +14,7 @@ da categoria Pior Filme do Golden Raspberry Awards.
 - Springdoc OpenAPI UI
 - Mapstruct
 - Org Apache Commons CSV
+- Log4J
 
 ## Executar projeto:
 ```console
