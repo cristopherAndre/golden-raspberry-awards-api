@@ -20,6 +20,11 @@ da categoria Pior Filme do Golden Raspberry Awards.
 ```console
 mvn spring-boot:run
 ``` 
+# Execução de Teste
+```console
+mvn test
+``` 
+
 ## Funcionallidades:
 - Importação de dados através de arquivo CSV para a H2 Database.
 - API Rest para as entidades Studios, Producers, Movies e GRANominees.
