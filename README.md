@@ -23,11 +23,12 @@ mvn spring-boot:run
 ## Funcionallidades:
 - Importação de dados através de arquivo CSV para a H2 Database.
 - API Rest para as entidades Studios, Producers, Movies e GRANominees.
-- Testes de integração
-- http://localhost:8080/api/v1/swagger-ui/index.html
+- Testes de integração.
+- Link API: http://localhost:8080/api/v1/swagger-ui/index.html
 - <img alt="Golden Raspberry Awards API" title="Bethehero" src=".github/GRA_API.png"/>
 
 - Obter o produtor com maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido.
+- Link Endpoint: http://localhost:8080/api/v1/granominees/minMaxGRAWinnersInterval
 - <img alt="GRA Min Max" title="Bethehero" src=".github/GRA_WINNERS_MIN_MAX.png"/>
 
 ## Diagrama ER:
