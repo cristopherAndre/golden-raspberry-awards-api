@@ -14,10 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GRAWinnerDTO {
+public class GRANomineeDTO {
 
     private Long id;
     private Integer awardYear;
+    private Boolean isWinner;
     private Movie movie;
 
 }

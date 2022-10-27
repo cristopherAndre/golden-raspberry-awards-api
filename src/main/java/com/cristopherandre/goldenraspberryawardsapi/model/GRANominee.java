@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "grawinners")
-public class GRAWinner {
+@Entity(name = "granominees")
+public class GRANominee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,9 @@ public class GRAWinner {
 
     @Column(nullable = false)
     private Integer awardYear;
+
+    @Column(nullable = false)
+    private Boolean isWinner;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Movie movie;

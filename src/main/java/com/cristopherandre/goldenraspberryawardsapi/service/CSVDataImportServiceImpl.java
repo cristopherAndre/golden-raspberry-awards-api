@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
+import com.cristopherandre.goldenraspberryawardsapi.model.GRANominee;
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
-import com.cristopherandre.goldenraspberryawardsapi.repository.GRAWinnerRepository;
+import com.cristopherandre.goldenraspberryawardsapi.repository.GRANomineeRepository;
 
 /**
  * @author Cristopher Andre
@@ -33,7 +33,7 @@ public class CSVDataImportServiceImpl implements CSVDataImportService {
     private Environment env;
 
     @Autowired
-    private GRAWinnerRepository graWinnerRepository;
+    private GRANomineeRepository graNomineeRepository;
 
     @Autowired
     private ProducerService producerService;
@@ -80,17 +80,15 @@ public class CSVDataImportServiceImpl implements CSVDataImportService {
                 Movie movie = Movie.builder().title(title).producers(producersList).studios(studiosList).build();
                 movieService.saveMovie(movie);
 
-                if (isWinner) {
-                    GRAWinner graWinner = GRAWinner.builder().awardYear(year).movie(movie).build();
-                    graWinnerRepository.save(graWinner);
-                }
+                GRANominee graWinner = GRANominee.builder().awardYear(year).movie(movie).isWinner(isWinner).build();
+                graNomineeRepository.save(graWinner);
             }
             Instant end = Instant.now();
             timeElapsed = Duration.between(start, end);
         } catch (Exception e) {
             logger.error("---------ERROR WHILE IMPORTING CSV DATA---------", e);
         } finally {
-            logger.info("---------FINISHED CSV IMPORT DATA--------->" + "Time taken (ms): " + timeElapsed.toMillis());
+            logger.info("---------FINISHED CSV IMPORT DATA: " + "Time taken (ms): " + timeElapsed.toMillis());
             if (Objects.nonNull(csvFile)) {
                 try {
                     csvFile.close();

@@ -13,43 +13,54 @@ import org.springframework.stereotype.Service;
 import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnerIntervalDTO;
 import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnersMinMaxDTO;
 import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundException;
-import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
-import com.cristopherandre.goldenraspberryawardsapi.repository.GRAWinnerRepository;
+import com.cristopherandre.goldenraspberryawardsapi.model.GRANominee;
+import com.cristopherandre.goldenraspberryawardsapi.repository.GRANomineeRepository;
 
 /**
  * @author Cristopher Andre
  */
 @Service
-public class GRAWinnerServiceImpl implements GRAWinnerService {
+public class GRANomineeServiceImpl implements GRANomineeService {
 
     @Autowired
-    private GRAWinnerRepository repository;
+    private GRANomineeRepository repository;
 
     @Override
-    public Collection<GRAWinner> findAll() {
+    public GRANominee findById(Long id) {
+        Optional<GRANominee> graNominee = Optional.empty();
+        if (Objects.nonNull(id)) {
+            graNominee = repository.findById(id);
+            if (!graNominee.isPresent())
+                throw new RecordNotFoundException(id);
+        }
+        return graNominee.isPresent() ? graNominee.get() : null;
+    }
+
+    @Override
+    public Collection<GRANominee> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public GRAWinner saveGRAWinner(GRAWinner graWinner) {
-        GRAWinner newGRAWinner = null;
-        if (Objects.nonNull(graWinner)) {
-            newGRAWinner = repository.save(graWinner);
+    public GRANominee saveGRANominee(GRANominee graNominee) {
+        GRANominee newGRAWinner = null;
+        if (Objects.nonNull(graNominee)) {
+            newGRAWinner = repository.save(graNominee);
         }
         return newGRAWinner;
     }
 
     @Override
-    public GRAWinner updateGRAWinner(Long id, GRAWinner graWinner) {
+    public GRANominee updateGRANominee(Long id, GRANominee graNominee) {
         if (!repository.findById(id).isPresent())
             throw new RecordNotFoundException(id);
-        return repository.save(graWinner);
+        return repository.save(graNominee);
     }
 
     @Override
-    public void deleteGRAWinner(Long id) {
+    public void deleteGRANominee(Long id) {
         if (Objects.nonNull(id)) {
-            Optional<GRAWinner> graStudio = repository.findById(id);
+            Optional<GRANominee> graStudio = repository.findById(id);
             if (!graStudio.isPresent())
                 throw new RecordNotFoundException(id);
             repository.delete(graStudio.get());
@@ -62,7 +73,7 @@ public class GRAWinnerServiceImpl implements GRAWinnerService {
     }
 
     @Override
-    public GRAWinnersMinMaxDTO findGRAWinnersMinMax() {
+    public GRAWinnersMinMaxDTO findGRAWinnersMinMaxInterval() {
 
         GRAWinnersMinMaxDTO graWinnersMinMaxDTO = new GRAWinnersMinMaxDTO();
 
