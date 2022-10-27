@@ -7,14 +7,18 @@ import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 
 public interface ProducerService {
 
-    public abstract void saveProducer(Producer producer);
+    public abstract Producer findById(Long id);
+
+    public abstract Producer findByName(String name);
+
+    public abstract Collection<Producer> findAll();
+
+    public abstract Producer saveProducer(Producer producer);
 
     public abstract Set<Producer> saveProducers(String producers);
 
-    public abstract void updateProducer(Long id, Producer producer);
+    public abstract Producer updateProducer(Long id, Producer producer);
 
     public abstract void deleteProducer(Long id);
 
-    public abstract Collection<Producer> fetchProducers();
-    
 }

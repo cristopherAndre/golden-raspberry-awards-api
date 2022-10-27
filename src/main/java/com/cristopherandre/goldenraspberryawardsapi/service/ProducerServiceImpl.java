@@ -21,28 +21,39 @@ public class ProducerServiceImpl implements ProducerService {
     private ProducerRepository repository;
 
     @Override
-    public void saveProducer(Producer producer) {
-        repository.save(producer);
+    public Producer findById(Long id) {
+        Optional<Producer> producer = Optional.empty();
+        if (Objects.nonNull(id)) {
+            producer = repository.findById(id);
+            if (!producer.isPresent())
+                throw new RecordNotFoundException(id);
+        }
+        return producer.isPresent() ? producer.get() : null;
     }
 
     @Override
-    public void updateProducer(Long id, Producer producer) {
-        if (!repository.findById(id).isPresent())
-            throw new RecordNotFoundException(id);
-        repository.save(producer);
+    public Producer findByName(String name) {
+        Optional<Producer> producer = Optional.empty();
+        if (Objects.nonNull(name)) {
+            producer = repository.findByName(name);
+            if (!producer.isPresent())
+                throw new RecordNotFoundException(name);
+        }
+        return producer.isPresent() ? producer.get() : null;
     }
 
     @Override
-    public void deleteProducer(Long id) {
-        Optional<Producer> producer = repository.findById(id);
-        if (!producer.isPresent())
-            throw new RecordNotFoundException(id);
-        repository.delete(producer.get());
-    }
-
-    @Override
-    public Collection<Producer> fetchProducers() {
+    public Collection<Producer> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Producer saveProducer(Producer producer) {
+        Producer newProducer = null;
+        if (Objects.nonNull(producer)) {
+            newProducer = repository.save(producer);
+        }
+        return newProducer;
     }
 
     @Override
@@ -52,7 +63,8 @@ public class ProducerServiceImpl implements ProducerService {
 
         if (Objects.nonNull(producerNames) && producerNames.length > 0) {
             for (String producerName : producerNames) {
-                Producer producerModel = repository.findByName(producerName);
+                Optional<Producer> producerModelOptional = repository.findByName(producerName);
+                Producer producerModel = producerModelOptional.isPresent() ? producerModelOptional.get() : null;
                 if (Objects.isNull(producerModel)) {
                     Producer producer = Producer.builder().name(producerName).build();
                     producerModel = repository.save(producer);
@@ -61,6 +73,23 @@ public class ProducerServiceImpl implements ProducerService {
             }
         }
         return ret;
+    }
+
+    @Override
+    public Producer updateProducer(Long id, Producer producer) {
+        if (!repository.findById(id).isPresent())
+            throw new RecordNotFoundException(id);
+        return repository.save(producer);
+    }
+
+    @Override
+    public void deleteProducer(Long id) {
+        if (Objects.nonNull(id)) {
+            Optional<Producer> producer = repository.findById(id);
+            if (!producer.isPresent())
+                throw new RecordNotFoundException(id);
+            repository.delete(producer.get());
+        }
     }
 
 }

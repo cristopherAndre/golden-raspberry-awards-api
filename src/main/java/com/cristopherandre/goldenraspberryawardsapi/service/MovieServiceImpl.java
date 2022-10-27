@@ -1,6 +1,7 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,39 @@ public class MovieServiceImpl implements MovieService {
     private MovieRepository repository;
 
     @Override
+    public Movie findById(Long id) {
+        Optional<Movie> movie = Optional.empty();
+        if (Objects.nonNull(id)) {
+            movie = repository.findById(id);
+            if (!movie.isPresent())
+                throw new RecordNotFoundException(id);
+        }
+        return movie.isPresent() ? movie.get() : null;
+    }
+
+    @Override
+    public Movie findByTitle(String title) {
+        Optional<Movie> movie = Optional.empty();
+        if (Objects.nonNull(title)) {
+            movie = repository.findByTitle(title);
+            if (!movie.isPresent())
+                throw new RecordNotFoundException(title);
+        }
+        return movie.isPresent() ? movie.get() : null;
+    }
+
+    @Override
+    public Collection<Movie> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public Movie saveMovie(Movie movie) {
-        return repository.save(movie);
+        Movie newMovie = null;
+        if (Objects.nonNull(movie)) {
+            newMovie = repository.save(movie);
+        }
+        return newMovie;
     }
 
     @Override
@@ -30,16 +62,13 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void deleteMovie(Long id) {
-        Optional<Movie> movie = repository.findById(id);
-        if (!movie.isPresent())
-            throw new RecordNotFoundException(id);
-        repository.delete(movie.get());
+        if (Objects.nonNull(id)) {
+            Optional<Movie> movie = repository.findById(id);
+            if (!movie.isPresent())
+                throw new RecordNotFoundException(id);
+            repository.delete(movie.get());
 
-    }
-
-    @Override
-    public Collection<Movie> fetchMovies() {
-        return repository.findAll();
+        }
     }
 
 }

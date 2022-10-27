@@ -1,5 +1,7 @@
 package com.cristopherandre.goldenraspberryawardsapi.dto;
 
+import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +15,6 @@ public class GRAWinnerDTO {
 
     private Long id;
     private Integer awardYear;
-    
+    private Movie movie;
+
 }

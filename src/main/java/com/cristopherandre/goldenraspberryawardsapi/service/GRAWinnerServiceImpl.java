@@ -1,7 +1,9 @@
 package com.cristopherandre.goldenraspberryawardsapi.service;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,17 @@ public class GRAWinnerServiceImpl implements GRAWinnerService {
     private GRAWinnerRepository repository;
 
     @Override
+    public Collection<GRAWinner> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public GRAWinner saveGRAWinner(GRAWinner graWinner) {
-        return repository.save(graWinner);
+        GRAWinner newGRAWinner = null;
+        if (Objects.nonNull(graWinner)) {
+            newGRAWinner = repository.save(graWinner);
+        }
+        return newGRAWinner;
     }
 
     @Override
@@ -34,51 +45,64 @@ public class GRAWinnerServiceImpl implements GRAWinnerService {
 
     @Override
     public void deleteGRAWinner(Long id) {
-        Optional<GRAWinner> graWinner = repository.findById(id);
-        if (!graWinner.isPresent())
-            throw new RecordNotFoundException(id);
-        repository.delete(graWinner.get());
-
+        if (Objects.nonNull(id)) {
+            Optional<GRAWinner> graStudio = repository.findById(id);
+            if (!graStudio.isPresent())
+                throw new RecordNotFoundException(id);
+            repository.delete(graStudio.get());
+        }
     }
 
     @Override
-    public List<GRAWinner> fetchGRAWinners() {
-        return repository.findAll();
-    }
-
-    @Override
-    public List<GRAWinnerIntervalDTO> fetchGRAWinnersInterval() {
+    public List<GRAWinnerIntervalDTO> findGRAWinnersInterval() {
         return repository.findGRAWinnersInterval();
-
     }
 
     @Override
     public GRAWinnersMinMaxDTO findGRAWinnersMinMax() {
 
         GRAWinnersMinMaxDTO graWinnersMinMaxDTO = new GRAWinnersMinMaxDTO();
-        List<GRAWinnerIntervalDTO> graWinnersInterval = fetchGRAWinnersInterval();
 
-        graWinnersInterval.sort(Comparator.comparing(GRAWinnerIntervalDTO::getInterval));
+        // Busca todos ganhadores com mais de um premio
+        List<GRAWinnerIntervalDTO> graWinnersInterval = findGRAWinnersInterval();
 
-        int min = graWinnersInterval.stream().min(Comparator.comparing(GRAWinnerIntervalDTO::getInterval)).get()
-                .getInterval();
-
+        // Como pode existir mais de um ganhador com o mesmo intervalo Minimo de premios
+        // Retorno a lista de ganahdores que tenham o mesmo intervalo Minimo de premios
+        Integer min = getMinInterval(graWinnersInterval);
         List<GRAWinnerIntervalDTO> graMinWinnersInterval = graWinnersInterval.stream()
-                .filter(g -> g.getInterval() == min)
+                .filter(g -> g.getInterval().equals(min))
                 .collect(Collectors.toList());
-
         graWinnersMinMaxDTO.setMin(graMinWinnersInterval);
 
-        int max = graWinnersInterval.stream().max(Comparator.comparing(GRAWinnerIntervalDTO::getInterval)).get()
-                .getInterval();
-
+        // Como pode existir mais de um ganhador com o mesmo intervalo Maximo de premios
+        // Retorno a lista de ganahdores que tenham o mesmo intervalo Maximo de premios
+        Integer max = getMaxInterval(graWinnersInterval);
         List<GRAWinnerIntervalDTO> graMaxWinnersInterval = graWinnersInterval.stream()
-                .filter(g -> g.getInterval() == max)
+                .filter(g -> g.getInterval().equals(max))
                 .collect(Collectors.toList());
-
         graWinnersMinMaxDTO.setMax(graMaxWinnersInterval);
 
         return graWinnersMinMaxDTO;
+    }
+
+    private Integer getMinInterval(List<GRAWinnerIntervalDTO> graWinnersInterval) {
+        Integer minInterval = null;
+        Optional<GRAWinnerIntervalDTO> min = graWinnersInterval.stream()
+                .min(Comparator.comparing(GRAWinnerIntervalDTO::getInterval));
+        if (min.isPresent()) {
+            minInterval = min.get().getInterval();
+        }
+        return minInterval;
+    }
+
+    private Integer getMaxInterval(List<GRAWinnerIntervalDTO> graWinnersInterval) {
+        Integer maxInterval = null;
+        Optional<GRAWinnerIntervalDTO> max = graWinnersInterval.stream()
+                .max(Comparator.comparing(GRAWinnerIntervalDTO::getInterval));
+        if (max.isPresent()) {
+            maxInterval = max.get().getInterval();
+        }
+        return maxInterval;
     }
 
 }

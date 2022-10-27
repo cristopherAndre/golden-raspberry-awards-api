@@ -6,4 +6,8 @@ public class RecordNotFoundException extends RuntimeException {
         super("Record not found: " + id);
     }
 
+    public RecordNotFoundException(String name) {
+        super("Record not found: " + name);
+    }
+
 }
