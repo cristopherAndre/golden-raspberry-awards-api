@@ -13,6 +13,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Cristopher Andre
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +30,7 @@ public class GRAWinner {
     @Column(nullable = false)
     private Integer awardYear;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     private Movie movie;
 
 }

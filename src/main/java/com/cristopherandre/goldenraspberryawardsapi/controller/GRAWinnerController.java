@@ -17,6 +17,9 @@ import com.cristopherandre.goldenraspberryawardsapi.mapper.GRAWinnerMapper;
 import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
 import com.cristopherandre.goldenraspberryawardsapi.service.GRAWinnerService;
 
+/**
+ * @author Cristopher Andre
+ */
 @RestController
 @RequestMapping("/api/v1/grawinners")
 public class GRAWinnerController {

@@ -21,6 +21,9 @@ import com.cristopherandre.goldenraspberryawardsapi.mapper.ProducerMapper;
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 import com.cristopherandre.goldenraspberryawardsapi.service.ProducerService;
 
+/**
+ * @author Cristopher Andre
+ */
 @RestController
 @RequestMapping("/api/v1/producers")
 public class ProducerController {

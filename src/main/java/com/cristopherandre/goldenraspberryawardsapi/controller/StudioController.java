@@ -21,6 +21,9 @@ import com.cristopherandre.goldenraspberryawardsapi.mapper.StudioMapper;
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 import com.cristopherandre.goldenraspberryawardsapi.service.StudioService;
 
+/**
+ * @author Cristopher Andre
+ */
 @RestController
 @RequestMapping("/api/v1/studios")
 public class StudioController {

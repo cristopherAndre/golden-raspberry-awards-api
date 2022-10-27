@@ -6,6 +6,9 @@ import org.mapstruct.factory.Mappers;
 import com.cristopherandre.goldenraspberryawardsapi.dto.MovieDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 
+/**
+ * @author Cristopher Andre
+ */
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
 

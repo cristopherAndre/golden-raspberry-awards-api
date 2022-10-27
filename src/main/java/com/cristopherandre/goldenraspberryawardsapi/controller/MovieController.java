@@ -21,6 +21,9 @@ import com.cristopherandre.goldenraspberryawardsapi.mapper.MovieMapper;
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 import com.cristopherandre.goldenraspberryawardsapi.service.MovieService;
 
+/**
+ * @author Cristopher Andre
+ */
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {

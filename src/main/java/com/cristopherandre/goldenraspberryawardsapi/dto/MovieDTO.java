@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Cristopher Andre
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,5 +16,5 @@ public class MovieDTO {
 
     private Long id;
     private String title;
-    
+
 }

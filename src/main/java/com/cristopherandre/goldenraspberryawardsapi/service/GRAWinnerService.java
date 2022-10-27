@@ -7,6 +7,9 @@ import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnerIntervalDTO;
 import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnersMinMaxDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
 
+/**
+ * @author Cristopher Andre
+ */
 public interface GRAWinnerService {
 
     public abstract Collection<GRAWinner> findAll();

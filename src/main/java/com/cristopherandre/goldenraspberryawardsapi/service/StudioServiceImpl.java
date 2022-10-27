@@ -14,6 +14,9 @@ import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundExc
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 import com.cristopherandre.goldenraspberryawardsapi.repository.StudioRepository;
 
+/**
+ * @author Cristopher Andre
+ */
 @Service
 public class StudioServiceImpl implements StudioService {
 

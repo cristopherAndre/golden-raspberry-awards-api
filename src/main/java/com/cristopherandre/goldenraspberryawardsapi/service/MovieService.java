@@ -4,6 +4,9 @@ import java.util.Collection;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 
+/**
+ * @author Cristopher Andre
+ */
 public interface MovieService {
 
     public abstract Movie findById(Long id);

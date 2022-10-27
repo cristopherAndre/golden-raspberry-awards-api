@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundException;
 
+/**
+ * @author Cristopher Andre
+ */
 @ControllerAdvice
 public class RecordNotFoundAdvise {
 

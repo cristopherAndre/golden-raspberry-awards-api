@@ -16,6 +16,9 @@ import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundExc
 import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
 import com.cristopherandre.goldenraspberryawardsapi.repository.GRAWinnerRepository;
 
+/**
+ * @author Cristopher Andre
+ */
 @Service
 public class GRAWinnerServiceImpl implements GRAWinnerService {
 

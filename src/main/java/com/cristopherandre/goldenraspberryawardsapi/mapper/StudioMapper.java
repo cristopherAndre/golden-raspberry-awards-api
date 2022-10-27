@@ -6,6 +6,9 @@ import org.mapstruct.factory.Mappers;
 import com.cristopherandre.goldenraspberryawardsapi.dto.StudioDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 
+/**
+ * @author Cristopher Andre
+ */
 @Mapper(componentModel = "spring")
 public interface StudioMapper {
 
@@ -14,5 +17,5 @@ public interface StudioMapper {
     StudioDTO toStudioDTO(Studio studio);
 
     Studio toStudio(StudioDTO studioDTO);
-    
+
 }

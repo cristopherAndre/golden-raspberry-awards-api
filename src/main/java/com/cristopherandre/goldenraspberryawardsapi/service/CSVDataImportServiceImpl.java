@@ -21,6 +21,9 @@ import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 import com.cristopherandre.goldenraspberryawardsapi.repository.GRAWinnerRepository;
 
+/**
+ * @author Cristopher Andre
+ */
 @Service
 public class CSVDataImportServiceImpl implements CSVDataImportService {
 

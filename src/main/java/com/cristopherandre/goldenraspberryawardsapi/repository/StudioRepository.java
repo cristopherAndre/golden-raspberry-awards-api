@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 
+/**
+ * @author Cristopher Andre
+ */
 @Repository
 public interface StudioRepository extends JpaRepository<Studio, Long> {
 

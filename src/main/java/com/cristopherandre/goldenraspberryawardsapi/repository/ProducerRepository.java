@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 
+/**
+ * @author Cristopher Andre
+ */
 @Repository
 public interface ProducerRepository extends JpaRepository<Producer, Long> {
 

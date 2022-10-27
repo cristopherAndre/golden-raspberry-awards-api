@@ -11,6 +11,9 @@ import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundExc
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 import com.cristopherandre.goldenraspberryawardsapi.repository.MovieRepository;
 
+/**
+ * @author Cristopher Andre
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
 

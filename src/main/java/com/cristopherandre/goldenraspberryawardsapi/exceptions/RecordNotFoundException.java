@@ -1,5 +1,8 @@
 package com.cristopherandre.goldenraspberryawardsapi.exceptions;
 
+/**
+ * @author Cristopher Andre
+ */
 public class RecordNotFoundException extends RuntimeException {
 
     public RecordNotFoundException(Long id) {

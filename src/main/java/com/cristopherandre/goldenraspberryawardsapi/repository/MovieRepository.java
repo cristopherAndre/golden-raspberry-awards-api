@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Movie;
 
+/**
+ * @author Cristopher Andre
+ */
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 

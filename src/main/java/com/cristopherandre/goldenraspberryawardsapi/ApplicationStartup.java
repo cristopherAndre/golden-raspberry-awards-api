@@ -9,6 +9,9 @@ import com.cristopherandre.goldenraspberryawardsapi.service.CSVDataImportService
 
 import lombok.AllArgsConstructor;
 
+/**
+ * @author Cristopher Andre
+ */
 @AllArgsConstructor
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {

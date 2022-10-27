@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnerIntervalDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
 
+/**
+ * @author Cristopher Andre
+ */
 @Repository
 public interface GRAWinnerRepository extends JpaRepository<GRAWinner, Long> {
 

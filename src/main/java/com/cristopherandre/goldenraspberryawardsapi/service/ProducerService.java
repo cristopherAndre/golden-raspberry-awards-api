@@ -5,6 +5,9 @@ import java.util.Set;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 
+/**
+ * @author Cristopher Andre
+ */
 public interface ProducerService {
 
     public abstract Producer findById(Long id);

@@ -6,6 +6,9 @@ import org.mapstruct.factory.Mappers;
 import com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnerDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.GRAWinner;
 
+/**
+ * @author Cristopher Andre
+ */
 @Mapper(componentModel = "spring")
 public interface GRAWinnerMapper {
 

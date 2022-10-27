@@ -5,6 +5,9 @@ import java.util.Set;
 
 import com.cristopherandre.goldenraspberryawardsapi.model.Studio;
 
+/**
+ * @author Cristopher Andre
+ */
 public interface StudioService {
 
     public abstract Studio findById(Long id);

@@ -6,6 +6,9 @@ import org.mapstruct.factory.Mappers;
 import com.cristopherandre.goldenraspberryawardsapi.dto.ProducerDTO;
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 
+/**
+ * @author Cristopher Andre
+ */
 @Mapper(componentModel = "spring")
 public interface ProducerMapper {
 
@@ -14,5 +17,5 @@ public interface ProducerMapper {
     ProducerDTO toProducerDTO(Producer producer);
 
     Producer toProducer(ProducerDTO producerDTO);
-    
+
 }

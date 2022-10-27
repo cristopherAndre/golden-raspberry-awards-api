@@ -14,6 +14,9 @@ import com.cristopherandre.goldenraspberryawardsapi.exceptions.RecordNotFoundExc
 import com.cristopherandre.goldenraspberryawardsapi.model.Producer;
 import com.cristopherandre.goldenraspberryawardsapi.repository.ProducerRepository;
 
+/**
+ * @author Cristopher Andre
+ */
 @Service
 public class ProducerServiceImpl implements ProducerService {
 

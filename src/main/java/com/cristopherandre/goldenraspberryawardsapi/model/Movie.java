@@ -15,6 +15,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Cristopher Andre
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,10 +32,10 @@ public class Movie {
     @Column(nullable = false)
     private String title;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Studio> studios;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Producer> producers;
 
 }
