@@ -5,7 +5,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import com.cristopherandre.goldenraspberryawardsapi.service.GRAWinnerService;
+import com.cristopherandre.goldenraspberryawardsapi.service.CSVDataImportService;
 
 import lombok.AllArgsConstructor;
 
@@ -14,11 +14,11 @@ import lombok.AllArgsConstructor;
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
-    private GRAWinnerService graWinnerService;
+    private CSVDataImportService csvDataImportService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        graWinnerService.loadGRAWinners();
+        csvDataImportService.importCSVData();
     }
 
 }

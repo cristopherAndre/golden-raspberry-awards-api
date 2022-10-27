@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,8 +34,5 @@ public class Movie {
 
     @ManyToMany(fetch=FetchType.EAGER)
     private Set<Producer> producers;
-
-    // @OneToOne(fetch=FetchType.EAGER)
-    // private GRAWinner graWinners;
 
 }

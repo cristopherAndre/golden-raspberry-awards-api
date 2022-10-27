@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProducerDTO {
+public class GRAWinnerIntervalDTO {
 
-    private Long id;
-    private String name;
+    private String producer;
+    private Integer interval;
+    private Integer previousWin;
+    private Integer followingWin;
 
 }

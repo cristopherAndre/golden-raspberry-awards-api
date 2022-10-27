@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "winners")
+@Entity(name = "grawinners")
 public class GRAWinner {
 
     @Id
