@@ -1,4 +1,4 @@
-package com.cristopherandre.goldenraspberryawardsapi.controller;
+package com.cristopherandre.goldenraspberryawardsapi.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,8 +27,6 @@ import com.cristopherandre.goldenraspberryawardsapi.dto.ProducerDTO;
 import com.cristopherandre.goldenraspberryawardsapi.dto.StudioDTO;
 import com.cristopherandre.goldenraspberryawardsapi.mapper.GRANomineeMapper;
 import com.cristopherandre.goldenraspberryawardsapi.model.GRANominee;
-import com.cristopherandre.goldenraspberryawardsapi.service.CSVDataImportService;
-import com.cristopherandre.goldenraspberryawardsapi.service.GRANomineeService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = GoldenRaspberryAwardsApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
