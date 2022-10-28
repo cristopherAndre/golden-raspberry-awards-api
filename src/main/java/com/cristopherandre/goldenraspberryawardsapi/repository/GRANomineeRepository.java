@@ -16,31 +16,30 @@ import com.cristopherandre.goldenraspberryawardsapi.model.GRANominee;
 @Repository
 public interface GRANomineeRepository extends JpaRepository<GRANominee, Long> {
 
-    /*
-     * SQL QUERY:
-     * SELECT
-     * P.NAME AS PRODUCER,
-     * MIN(N.AWARD_YEAR) AS FIRST_AWARD,
-     * MAX(N.AWARD_YEAR) AS LAST_AWARD,
-     * (MAX(N.AWARD_YEAR) - MIN(N.AWARD_YEAR)) AS DIFF_BTW_AWARDS
-     * FROM GRANOMINEES AS N
-     * INNER JOIN MOVIES AS M ON M.ID = N.MOVIE_ID
-     * INNER JOIN MOVIES_PRODUCERS AS MP ON MP.MOVIES_ID = M.ID
-     * INNER JOIN PRODUCERS AS P ON P.ID = MP.PRODUCERS_ID
-     * WHERE N.IS_WINNER = TRUE
-     * GROUP BY P.NAME
-     * HAVING COUNT (M.TITLE) > 1
-     * ORDER BY DIFF_BTW_AWARDS
-     */
-    @Query("SELECT new com.cristopherandre.goldenraspberryawardsapi.dto.GRAWinnerIntervalDTO( "
-            + "p.name, (MAX(n.awardYear) - MIN(n.awardYear)), MIN(n.awardYear), MAX(n.awardYear)) "
-            + "FROM granominees AS n "
-            + "INNER JOIN n.movie as m "
-            + "INNER JOIN m.producers as p "
-            + "WHERE n.isWinner = TRUE "
-            + "GROUP BY p.name "
-            + "HAVING COUNT (m.title) > 1 "
-            + "ORDER BY (MAX(n.awardYear) - MIN(n.awardYear)) ")
+    // SQL QUERY:
+    // SELECT producer as producer, award_year as awardYear, next_award_year as
+    // nextAwardYear, (next_award_year - award_year) AS awardYearDiff
+    // FROM (
+    // SELECT producer, award_year,
+    // (SELECT Min(award_year) FROM(
+    // SELECT p.NAME AS producer, n.award_year AS award_year
+    // FROM granominees AS n
+    // INNER JOIN movies AS m ON m.id = n.movie_id
+    // INNER JOIN movies_producers AS mp ON mp.movies_id = m.id
+    // INNER JOIN producers AS p ON p.id = mp.producers_id
+    // WHERE n.is_winner = true ) AS t2
+    // WHERE t2.producer = t1.producer AND t2.award_year > t1.award_year) AS
+    // next_award_year
+    // FROM (
+    // SELECT p.NAME AS producer, n.award_year AS award_year
+    // FROM granominees AS n
+    // INNER JOIN movies AS m ON m.id = n.movie_id
+    // INNER JOIN movies_producers AS mp ON mp.movies_id = m.id
+    // INNER JOIN producers AS p ON p.id = mp.producers_id
+    // WHERE n.is_winner = true) AS t1)
+    // AS t
+    // WHERE next_award_year IS NOT NULL
+    @Query(nativeQuery = true)
     List<GRAWinnerIntervalDTO> findGRAWinnersInterval();
 
     public Optional<GRANominee> findByMovieId(Long id);
